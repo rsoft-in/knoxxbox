@@ -45,9 +45,6 @@
 </script>
 <div class="login-container">
     <div class="p-card">
-        <img class="p-card__thumbnail" src="<?php echo base_url() ?>res/knoxxbox.png" alt="">
-        <hr class="u-sv1">
-        <!-- <h3 class="p-card__title">Sign-In</h3> -->
         <p class="p-card__content">
         <form>
             <label for="u_name">Email address</label>

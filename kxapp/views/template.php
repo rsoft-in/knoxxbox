@@ -23,8 +23,8 @@
             <div class="p-panel is-dark">
                 <div class="p-panel__header">
                     <a class="p-panel__logo" href="#">
-                        <img class="p-panel__logo-icon" src="<?php echo base_url() ?>res/knoxxbox.svg" alt="<?php echo $this->config->item('app_name') ?>" height="24">
-                        <img class="p-panel__logo-name is-fading-when-collapsed" src="<?php echo base_url() ?>res/knoxxbox.png" alt="JAAS" style="height: 36px;">
+                        <img class="p-panel__logo-icon" src="<?php echo base_url() ?>res/knoxxbox.png" alt="<?php echo $this->config->item('app_name') ?>" height="24">
+                        <img class="p-panel__logo-name is-fading-when-collapsed" src="<?php echo base_url() ?>res/knoxxbox-banner.png" alt="JAAS" style="height: 24px;">
                     </a>
                     <div class="p-panel__controls">
                         <span class="p-panel__toggle js-menu-toggle">Menu</span>
@@ -38,8 +38,8 @@
                 <div class="p-panel is-dark">
                     <div class="p-panel__header is-sticky">
                         <a class="p-panel__logo" href="#">
-                            <img class="p-panel__logo-icon" src="<?php echo base_url() ?>res/knoxxbox.svg" alt="<?php echo $this->config->item('app_name') ?>" height="24">
-                            <img class="p-panel__logo-name is-fading-when-collapsed" src="<?php echo base_url() ?>res/knoxxbox.png" alt="JAAS" style="height: 36px;">
+                            <img class="p-panel__logo-icon" src="<?php echo base_url() ?>res/knoxxbox.png" alt="<?php echo $this->config->item('app_name') ?>" height="24">
+                            <img class="p-panel__logo-name is-fading-when-collapsed" src="<?php echo base_url() ?>res/knoxxbox-banner.png" alt="JAAS" style="height: 24px;">
                         </a>
                         <div class="p-panel__controls u-hide--large">
                             <button class="p-button--base has-icon u-no-margin u-hide--medium js-menu-close"><i class="p-icon--close"></i></button>
