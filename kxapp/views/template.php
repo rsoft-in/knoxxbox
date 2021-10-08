@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?php echo base_url() ?>res/default.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>res/icon_classes.css">
     <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.36.0.min.css" />
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="<?php echo base_url() ?>res/default.js"></script>
 
 </head>
@@ -53,33 +54,41 @@
                                     <?php if (isset($_SESSION["is_app_logged"])) { ?>
                                         <li class="p-side-navigation__item u-hide--large u-hide--medium">
                                             <a class="p-side-navigation__link" href="<?php echo base_url() ?>profile">
-                                                <i class="p-icon--user p-side-navigation__icon"></i>
+                                                <i class="la la-user p-side-navigation__icon"></i>
                                                 <span class="p-side-navigation__label"><?php echo $_SESSION["kx_username"] ?></span>
                                             </a>
                                         </li>
                                         <hr class="u-hide--large u-hide--medium">
                                     <?php } ?>
-                                    <li class="p-side-navigation__item">
-                                        <a class="p-side-navigation__link" href="<?php echo base_url() ?>">
-                                            <i class="rs-icon rs-icon__home p-side-navigation__icon"></i>
-                                            <span class="p-side-navigation__label"><span class="p-side-navigation__label">Home</span></span></a>
-                                    </li>
-                                    <li class="p-side-navigation__item">
-                                        <a class="p-side-navigation__link" href="<?php echo base_url() ?>pages/pricing">
-                                            <i class="rs-icon rs-icon__attachmoney p-side-navigation__icon"></i>
-                                            <span class="p-side-navigation__label">Pricing</span>
-                                        </a>
-                                    </li>
+                                    <?php if (!isset($_SESSION["is_app_logged"])) { ?>
+                                        <li class="p-side-navigation__item">
+                                            <a class="p-side-navigation__link" href="<?php echo base_url() ?>">
+                                                <i class="rs-icon rs-icon__home p-side-navigation__icon"></i>
+                                                <span class="p-side-navigation__label"><span class="p-side-navigation__label">Home</span></span></a>
+                                        </li>
+                                        <li class="p-side-navigation__item">
+                                            <a class="p-side-navigation__link" href="<?php echo base_url() ?>/pages/pricing">
+                                                <i class="rs-icon rs-icon__attachmoney p-side-navigation__icon"></i>
+                                                <span class="p-side-navigation__label">Pricing</span>
+                                            </a>
+                                        </li>
+                                    <?php } ?>
                                     <?php if (isset($_SESSION["is_app_logged"])) { ?>
                                         <li class="p-side-navigation__item">
-                                            <a class="p-side-navigation__link" href="#">
-                                                <i class="rs-icon rs-icon__dashboard p-side-navigation__icon"></i>
+                                            <a class="p-side-navigation__link" href="<?php echo base_url() ?>">
+                                                <i class="la la-chart-pie p-side-navigation__icon"></i>
                                                 <span class="p-side-navigation__label">Dashboard</span>
                                             </a>
                                         </li>
                                         <li class="p-side-navigation__item">
-                                            <a class="p-side-navigation__link" href="#">
-                                                <i class="rs-icon rs-icon__settings p-side-navigation__icon"></i>
+                                            <a class="p-side-navigation__link" href="<?php echo base_url() ?>business">
+                                                <i class="la la-briefcase p-side-navigation__icon"></i>
+                                                <span class="p-side-navigation__label">Business</span>
+                                            </a>
+                                        </li>
+                                        <li class="p-side-navigation__item">
+                                            <a class="p-side-navigation__link" href="<?php echo base_url() ?>settings">
+                                                <i class="la la-cog p-side-navigation__icon"></i>
                                                 <span class="p-side-navigation__label">Settings</span>
                                             </a>
                                         </li>
@@ -99,7 +108,7 @@
                     <div class="p-panel__controls">
                         <?php if (isset($_SESSION["is_app_logged"])) { ?>
                             <a href="<?php echo base_url() ?>profile" class="p-link--soft u-hide--small" style="margin-right: 10px;">
-                                <i class="p-icon--user"></i>
+                                <i class="la la-user"></i>
                                 <?php echo $_SESSION["kx_username"] ?></a>
                             <a class="u-no-margin--bottom p-link--soft" href="<?php echo base_url() ?>login/logout">Sign-Out</a>
                         <?php } else { ?>
@@ -127,8 +136,8 @@
         <div id="app-notification" style="display: none; position: absolute; top: 5px; right: 5px;">
             <div class="p-notification--information">
                 <div class="p-notification__content">
-                    <h5 class="p-notification__title">Knoxxbox</h5>
-                    <span class="p-notification__message"></span>
+                    <h5 class="p-notification__title toast-title">Knoxxbox</h5>
+                    <span class="p-notification__message toast-msg"></span>
                 </div>
             </div>
         </div>
@@ -154,27 +163,27 @@
         }
 
 
-        // if (document.querySelector('.js-menu-pin')) {
-        //     document.querySelector('.js-menu-pin').addEventListener('click', function() {
-        //         document.querySelector('.l-navigation').classList.toggle('is-pinned');
-        //         if (document.querySelector('.l-navigation').classList.contains('is-pinned')) {
-        //             document.querySelector('.js-menu-pin').querySelector('i').classList.remove('p-icon--pin');
-        //         } else {
-        //             document.querySelector('.js-menu-pin').querySelector('i').classList.add('p-icon--pin');
-        //         }
-        //         document.activeElement.blur();
-        //     });
-        // }
+        if (document.querySelector('.js-menu-pin')) {
+            document.querySelector('.js-menu-pin').addEventListener('click', function() {
+                document.querySelector('.l-navigation').classList.toggle('is-pinned');
+                if (document.querySelector('.l-navigation').classList.contains('is-pinned')) {
+                    document.querySelector('.js-menu-pin').querySelector('i').classList.remove('la la-thumbtack');
+                } else {
+                    document.querySelector('.js-menu-pin').querySelector('i').classList.add('la la-thumbtack');
+                }
+                document.activeElement.blur();
+            });
+        }
 
         function showNotification(msg, type) {
-            $('.p-notification__title').html(type);
-            $('.p-notification__message').html(msg);
+            $('.toast-title').html(type);
+            $('.toast-msg').html(msg);
             $('#app-notification').show();
             console.log(msg);
 
             setTimeout(function() {
                 $('#app-notification').hide();
-            }, 2000);
+            }, 3000);
         }
     </script>
 </body>

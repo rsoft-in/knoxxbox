@@ -44,7 +44,7 @@
             success: function(data) {
                 hideProgress();
                 if (data == "SUCCESS") {
-                    showToast('Successfully updated!');
+                    showNotification('Successfully updated!', 'Update');
                     dialog.close();
                     get_courses();
                 } else {
@@ -80,7 +80,7 @@
     </div>
     <div class="row">
         <div class="col-12">
-            <button type="button" class="p-button--positive u-float-right" id="save-details" onclick="save();">Save</button>
+            <button type="button" class="p-button--brand u-float-right" id="save-details" onclick="save();">Save</button>
         </div>
     </div>
 </form>
