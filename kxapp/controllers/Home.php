@@ -25,7 +25,7 @@ class Home extends CI_Controller
             }
         }
         $data = array(
-            'title' => 'Dashboard',
+            'title' => (isset($_SESSION["is_app_logged"]) ? 'Dashboard' : 'Welcome to Knoxxbox'),
             'content' => (isset($_SESSION["is_app_logged"]) ? 'dashboard_view' : 'home_view'),
             'business_id' => $business_id,
             'business_name' => $business_name
