@@ -3,14 +3,12 @@
 class RS_Controller extends CI_Controller {
 	function __construct() {
 		parent::__construct ();
-		session_start();
-		
-		// Check if login session is set else redirect to login page
-		if (!isset($_SESSION['kx_app_level'])) {
-			redirect ( 'login' );
+		if (isset($_SERVER['HTTP_ORIGIN'])) {
+			header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
+			header('Access-Control-Allow-Credentials: true');
+			header('Access-Control-Max-Age: 86400');    // cache for 1 day
 		}
-		
-		// $this->lang->load('default', 'english');
+		$this->load->library('encryption');
 		date_default_timezone_set('Asia/Kolkata');
 	}
 }

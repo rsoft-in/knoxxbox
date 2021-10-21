@@ -58,29 +58,36 @@
         });
     }
 </script>
-<form>
-    <div class="row">
-        <div class="col-6">
-            <label for="full-name-stacked" class="p-form__label">Full name</label>
-            <input type="text" id="u_name" autocomplete="name" required="" maxlength="50">
-
-            <label for="u_email" class="p-form__label">E-Mail</label>
-            <input type="text" id="u_email" autocomplete="email" disabled="disabled">
-
-            <label for="u_mobile" class="p-form__label">Mobile</label>
-            <input type="text" id="u_mobile" autocomplete="mobile" required="" maxlength="15">
-        </div>
-        <div class="col-6">
-            <label for="u_pwd" class="p-form__label">Current Password</label>
-            <input type="password" id="u_pwd" title="If you want to change, please fill in." maxlength="15">
-
-            <label for="u_pwd_new" class="p-form__label">New Password</label>
-            <input type="password" id="u_pwd_new" title="Enter your new password." maxlength="15">
+<div class="grid">
+    <div class="col col-50">
+        <div class="card form">
+            <div>
+                <label for="u_name">Full name</label>
+                <input type="text" id="u_name" required="" maxlength="50">
+            </div>
+            <div>
+                <label for="u_email">E-Mail</label>
+                <input type="text" id="u_email" disabled="disabled">
+            </div>
+            <div>
+                <label for="u_mobile">Mobile</label>
+                <input type="text" id="u_mobile" required="" maxlength="15">
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <button type="button" class="p-button--brand u-float-right" id="save-details" onclick="save();">Save</button>
+    <div class="col col-50">
+        <div class="card form">
+            <div>
+                <label for="u_pwd">Current Password</label>
+                <input type="password" id="u_pwd" title="If you want to change, please fill in current password." maxlength="15">
+            </div>
+            <div>
+                <label for="u_pwd_new">New Password</label>
+                <input type="password" id="u_pwd_new" title="Enter your new password." maxlength="15">
+            </div>
+            <div class="align-right">
+                <button type="button" class="p-button--brand u-float-right" id="save-details" onclick="save();">Save</button>
+            </div>
         </div>
     </div>
-</form>
+</div>

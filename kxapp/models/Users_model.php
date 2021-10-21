@@ -55,6 +55,16 @@ class Users_model extends CI_Model
         return $query;
     }
 
+    public function getUserByEmailMobile($user_email, $user_mobile)
+    {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->where('user_email', $user_email);
+        $this->db->or_where('user_mobile', $user_mobile);
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function insert($user_id, $user_email, $user_mobile, $user_name, $user_pwd)
     {
         $idata = array(

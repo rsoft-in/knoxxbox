@@ -19,6 +19,7 @@
         });
 
         function sign_in() {
+            if ($('#u_name').val() == '' || $('#u_pwd').val() == '') return;
             var postdata = {
                 'u': $('#u_name').val(),
                 'p': $('#u_pwd').val(),
@@ -44,26 +45,25 @@
     });
 </script>
 <div class="login-container">
-    <div class="p-card">
-        <p class="p-card__content">
-        <form>
+    <div class="card bordered form">
+        <h1>Sign-In</h1>
+        <div>
             <label for="u_name">Email address</label>
             <input type="email" class="flogin" id="u_name" name="u_name" placeholder="example@mail.com" autocomplete="email" value='<?php echo $kx_cookie_u ?>'>
-        </form>
-        <form>
+        </div>
+        <div>
             <label for="u_pwd">Password</label>
             <input type="password" class="flogin" id="u_pwd" name="u_pwd" autocomplete="current-password" value='<?php echo $kx_cookie_p ?>'>
-        </form>
-        <form>
+        </div>
+        <div>
             <label class="p-checkbox">
                 <input type="checkbox" id="chk-remember" aria-labelledby="chk-remember" class="p-checkbox__input" checked>
                 <span class="p-checkbox__label">Remember Me</span>
             </label>
-        </form>
-        <div class="u-align--left">
-            <button class="p-button--brand" id="sign-in-btn" type="button">Login</button>
-            <button class="p-button--neutral is-inline" id="register-btn" type="button">Register</button>
         </div>
-        </p>
+        <div class="align-right">
+            <button class="" id="sign-in-btn" type="button">Login</button>
+            <button class="secondary is-inline" id="register-btn" type="button">Register</button>
+        </div>
     </div>
 </div>

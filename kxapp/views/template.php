@@ -10,16 +10,49 @@
         <?php echo $this->config->item('app_name') ?>
     </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="<?php echo base_url() ?>res/style.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>res/default.css">
     <link rel="stylesheet" href="<?php echo base_url() ?>res/icon_classes.css">
-    <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.36.0.min.css" />
+    <!-- <link rel="stylesheet" href="https://assets.ubuntu.com/v1/vanilla-framework-version-2.36.0.min.css" /> -->
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="<?php echo base_url() ?>res/default.js"></script>
-
 </head>
 
 <body>
-    <div class="l-application" role="presentation">
+    <div class="container">
+        <header>
+            <div class="header-title">
+                <img src="<?php echo base_url() ?>res/knoxxbox.png" alt="<?php echo $this->config->item('app_name') ?>" height="48">
+                <span><?php echo $this->config->item('app_name') ?></span>
+            </div>
+            <div class="header-menu-small">
+                <button id="menu-drawer-button" class="icon" type="button"><i class="la la-bars"></i></button>
+            </div>
+            <div id="menu-bar" class="header-menu">
+                <?php if (!isset($_SESSION["is_app_logged"])) { ?>
+                    <a class="menu" href="<?php echo base_url() ?>">Home</a>
+                    <a class="menu" href="<?php echo base_url() ?>pages/pricing">Pricing</a>
+                    <a class="menu" href="<?php echo base_url() ?>login">Sign-In</a>
+                <?php } ?>
+                <?php if (isset($_SESSION["is_app_logged"])) { ?>
+                    <a class="menu" href="<?php echo base_url() ?>" title="Dashboard"><i class="la la-chart-pie"></i><span class="scr-small">Dashboard</span></a>
+                    <a class="menu" href="<?php echo base_url() ?>business">Business</a>
+                    <a class="menu" href="<?php echo base_url() ?>settings">Settings</a>
+                    <a class="menu" href="<?php echo base_url() ?>profile" title="Your Profile"><i class="la la-user"></i><span class="scr-small">Profile</span></a>
+                    <a class="menu" href="<?php echo base_url() ?>login/logout">Sign-Out</a>
+                <?php } ?>
+            </div>
+        </header>
+        <main>
+            <div class="content">
+                <?php $this->load->view($content) ?>
+            </div>
+        </main>
+    </div>
+    <div id="app-notification" class="notification">
+        <div id="app-motif-msg">Welcome!</div>
+    </div>
+    <!-- <div class="l-application" role="presentation">
         <div class="l-navigation-bar">
             <div class="p-panel is-dark">
                 <div class="p-panel__header">
@@ -119,8 +152,7 @@
                 <div class="p-panel__content">
                     <div class="u-fixed-width">
 
-                        <?php $this->load->view($content) ?>
-
+                        
                     </div>
                 </div>
             </div>
@@ -128,9 +160,7 @@
 
         <aside class="l-status">
             <div class="p-panel demo-status">
-                <!-- <div class="u-fixed-width"> -->
                 <div class="u-align--center"><small>&copy 2021 <a class='secondary' href='http://rennovationsoftware.com' target="_blank">Rennovation Software</a></small></div>
-                <!-- </div> -->
             </div>
         </aside>
         <div id="app-notification" style="display: none; position: absolute; top: 5px; right: 5px;">
@@ -185,7 +215,35 @@
                 $('#app-notification').hide();
             }, 3000);
         }
+    </script> -->
+
+    <script>
+        // MENU
+        var menu_visibility = false;
+        var menu_drawer_button = document.getElementById("menu-drawer-button");
+        menu_drawer_button.addEventListener("click", function() {
+            var menu_bar = document.getElementById("menu-bar");
+            if (!menu_visibility) {
+                menu_bar.style.display = "block";
+            } else {
+                menu_bar.style.display = "none";
+            }
+            menu_visibility = !menu_visibility;
+        });
+        // NOTIFICATIONS
+        var app_notif = document.getElementById("app-notification");
+        var app_notif_msg = document.getElementById("app-motif-msg");
+        app_notif.style.display = "none";
+
+        function showNotification(message) {
+            app_notif.style.display = "block";
+            app_notif_msg.innerHTML = message;
+            setTimeout(function() {
+                app_notif.style.display = "none"
+            }, 3000);
+        }
     </script>
+
 </body>
 
 </html>

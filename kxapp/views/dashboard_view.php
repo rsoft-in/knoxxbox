@@ -11,3 +11,6 @@
         </div>
     </div>
 <?php } ?>
+<div class="card">
+    <h2><?php echo $title?></h2>
+</div>
