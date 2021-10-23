@@ -7,9 +7,7 @@ class Users extends RS_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
 		$this->load->model('users_model');
-		$this->load->library('encryption');
 	}
 
 	public function getUserByEmail()
@@ -72,7 +70,7 @@ class Users extends RS_Controller
 				$codeSent = $this->sendEmailVerification($user->user_email, $user->user_name, $vcode);
 				if ($codeSent) {
 					$this->users_model->update($user->user_id, $data->mobile, $data->name, $this->encryption->encrypt($data->pwd));
-				    $this->users_model->updateOtp($data->email, $vcode);
+					$this->users_model->updateOtp($data->email, $vcode);
 					echo 'SUCCESS';
 				} else {
 					echo $this->email->print_debugger(array('headers'));
