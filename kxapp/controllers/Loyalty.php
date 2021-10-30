@@ -54,7 +54,7 @@ class Loyalty extends RS_Controller
         }
     }
 
-    public function upd() {
+    public function update() {
 		$data = json_decode ( $this->input->post ( 'postdata' ) );
 		$guid = $this->utility->guid ();
 		if ($data->mode === "add") {
@@ -72,7 +72,7 @@ class Loyalty extends RS_Controller
 		}
 	}
 
-    public function del() {
+    public function delete() {
 		$data = json_decode ( $this->input->post ( 'postdata' ) );
 		$this->loyalty_model->delete ( $data->id );
 		if ($this->db->affected_rows () > 0) {
