@@ -26,6 +26,7 @@ class Loyalty extends RS_Controller
             foreach ($loyalty->result() as $row) {
                 $_item = array(
                     'loyalty_id' => $row->loyalty_id,
+                    'loyalty_name' => $row->loyalty_name,
                     'loyalty_default' => $row->loyalty_default,
                     'loyalty_params' => $row->loyalty_params,
                     'loyalty_modified' => $row->loyalty_modified
@@ -44,6 +45,7 @@ class Loyalty extends RS_Controller
             $prow = $res->row();
             $dataArray = array(
                 'loyalty_id' => $prow->loyalty_id,
+                'loyalty_name' => $prow->loyalty_name,
                 'loyalty_default' => $prow->loyalty_default,
                 'loyalty_params' => $prow->loyalty_params,
                 'loyalty_modified' => $prow->loyalty_modified
@@ -58,18 +60,27 @@ class Loyalty extends RS_Controller
 		$data = json_decode ( $this->input->post ( 'postdata' ) );
 		$guid = $this->utility->guid ();
 		if ($data->mode === "add") {
-			$this->loyalty_model->insert ( $guid, $data->bid, $data->df, $data->param );
+			$this->loyalty_model->insert ( $guid, $data->bid, $data->ln, $data->df, $data->param );
 			if ($this->db->affected_rows () > 0) {
 				echo "SUCCESS";
 			} else
 				echo "Unable to process request";
 		} else {
-			$this->loyalty_model->update ( $data->id, $data->bid, $data->df, $data->param );
+			$this->loyalty_model->update ( $data->id, $data->ln, $data->param );
 			if ($this->db->affected_rows () > 0) {
 				echo "SUCCESS";
 			} else
 				echo "Unable to process request";
 		}
+	}
+
+    public function default() {
+		$data = json_decode ( $this->input->post ( 'postdata' ) );
+		$this->loyalty_model->setDefault ( $data->id );
+		if ($this->db->affected_rows () > 0) {
+			echo "SUCCESS";
+		} else
+			echo "Unable to process request";
 	}
 
     public function delete() {

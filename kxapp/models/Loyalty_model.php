@@ -35,11 +35,12 @@ class Loyalty_model extends CI_Model
         return $query;
     }
 
-    public function insert($loyalty_id, $loyalty_b_id, $loyalty_default, $loyalty_params)
+    public function insert($loyalty_id, $loyalty_b_id, $loyalty_name, $loyalty_default, $loyalty_params)
     {
         $idata = array(
             'loyalty_id' => $loyalty_id,
             'loyalty_b_id' => $loyalty_b_id,
+            'loyalty_name' => $loyalty_name,
             'loyalty_default' => $loyalty_default,
             'loyalty_params' => $loyalty_params,
             'loyalty_modified' => mdate("%Y-%m-%d %H:%i:%s", time())
@@ -47,9 +48,10 @@ class Loyalty_model extends CI_Model
         $this->db->insert('loyalty', $idata);
     }
 
-    public function update($loyalty_id, $loyalty_params)
+    public function update($loyalty_id, $loyalty_name, $loyalty_params)
     {
         $idata = array(
+            'loyalty_name' => $loyalty_name,
             'loyalty_params' => $loyalty_params,
             'loyalty_modified' => mdate("%Y-%m-%d %H:%i:%s", time())
         );
