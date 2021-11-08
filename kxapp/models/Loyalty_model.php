@@ -61,11 +61,9 @@ class Loyalty_model extends CI_Model
 
     public function setDefault($loyalty_id)
     {
-        $idata = array(
-            'loyalty_default' => "(loyalty_id = '" . $loyalty_id . "')",
-            'loyalty_modified' => mdate("%Y-%m-%d %H:%i:%s", time())
-        );
-        $this->db->update('loyalty', $idata);
+        $this->db->set('loyalty_default', "CASE WHEN loyalty_id = '" . $loyalty_id . "' THEN 1 ELSE 0 END", FALSE);
+        $this->db->set('loyalty_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->update('loyalty');
     }
 
     public function delete($loyalty_id) {
