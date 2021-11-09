@@ -140,4 +140,15 @@ class Users extends RS_Controller
 			return false;
 		}
 	}
+
+	public function changePwd()
+	{
+		$data = json_decode($this->input->post('postdata'));
+		$user = $this->users_model->updatePassword($data->uid, $this->encryption->encrypt($data->pwd) );
+		if ($this->db->affected_rows() > 0) {
+			echo 'SUCCESS';
+		} else {
+			echo "Unable to process request";
+		}
+	}
 }

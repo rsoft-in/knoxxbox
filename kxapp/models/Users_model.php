@@ -100,6 +100,16 @@ class Users_model extends CI_Model
         $this->db->update('users', $idata);
     }
 
+    public function updatePassword($user_id, $user_pwd)
+    {
+        $idata = array(
+            'user_pwd' => $user_pwd,
+            'user_modified' => mdate("%Y-%m-%d %H:%i:%s", time())
+        );
+        $this->db->where('user_id', $user_id);
+        $this->db->update('users', $idata);
+    }
+
     public function activate($user_email)
     {
         $idata = array(
