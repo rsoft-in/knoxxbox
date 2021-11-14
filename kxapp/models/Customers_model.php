@@ -82,24 +82,36 @@ class Customers_model extends CI_Model
         $this->db->update('customers', $idata);
     }
 
-    public function updatePoints($customer_id, $customer_points)
+    public function addPoints($customer_mobile, $customer_points)
     {
-        $idata = array(
-            'customer_points' => $customer_points,
-            'customer_modified' => mdate("%Y-%m-%d %H:%i:%s", time())
-        );
-        $this->db->where('customer_id', $customer_id);
-        $this->db->update('customers', $idata);
+        $this->db->set('customer_points', 'customer_points+' . $customer_points, FALSE);
+        $this->db->set('customer_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->where('customer_mobile', $customer_mobile);
+        $this->db->update('customers');
     }
 
-    public function updateCashBack($customer_id, $customer_cashback)
+    public function deductPoints($customer_mobile, $customer_points)
     {
-        $idata = array(
-            'customer_cashback' => $customer_cashback,
-            'customer_modified' => mdate("%Y-%m-%d %H:%i:%s", time())
-        );
-        $this->db->where('customer_id', $customer_id);
-        $this->db->update('customers', $idata);
+        $this->db->set('customer_points', 'customer_points-' . $customer_points, FALSE);
+        $this->db->set('customer_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->where('customer_mobile', $customer_mobile);
+        $this->db->update('customers');
+    }
+
+    public function addCashBack($customer_mobile, $customer_cashback)
+    {
+        $this->db->set('customer_cashback', 'customer_cashback+' . $customer_cashback, FALSE);
+        $this->db->set('customer_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->where('customer_mobile', $customer_mobile);
+        $this->db->update('customers');
+    }
+
+    public function deductCashBack($customer_mobile, $customer_cashback)
+    {
+        $this->db->set('customer_cashback', 'customer_cashback-' . $customer_cashback, FALSE);
+        $this->db->set('customer_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->where('customer_mobile', $customer_mobile);
+        $this->db->update('customers');
     }
 
     public function delete($customer_id)
