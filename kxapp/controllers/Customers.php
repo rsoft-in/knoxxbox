@@ -100,7 +100,7 @@ class Customers extends RS_Controller
         $guid = $this->utility->guid ();
         $this->customers_model->insert($guid, $postdata->bid, $postdata->name, $postdata->mobile,  $postdata->email, $postdata->address, 0, 0);
         if ($this->db->affected_rows () > 0) {
-            echo "{ \"result\": \"SUCCESS\", \"customer_id\": \"" . $guid . "\"}";
+            echo "{ \"result\": \"SUCCESS\", \"id\": \"" . $guid . "\"}";
         } else
             echo "Unable to process request";
     }
@@ -112,9 +112,9 @@ class Customers extends RS_Controller
             echo 'Unauthorized Access';
             return;
         }
-        $this->customers_model->insert($postdata->id, $postdata->bid, $postdata->name, $postdata->mobile,  $postdata->email, $postdata->address);
+        $this->customers_model->update($postdata->id, $postdata->bid, $postdata->name, $postdata->mobile,  $postdata->email, $postdata->address);
         if ($this->db->affected_rows () > 0) {
-            echo "{ \"result\": \"SUCCESS\", \"customer_id\": \"" . $postdata->id . "\"}";
+            echo "{ \"result\": \"SUCCESS\", \"id\": \"" . $postdata->id . "\"}";
         } else
             echo "Unable to process request";
     }
@@ -128,7 +128,7 @@ class Customers extends RS_Controller
         }
         $this->customers_model->addPoints($postdata->mobile, $postdata->points);
         if ($this->db->affected_rows () > 0) {
-            echo "{ \"result\": \"SUCCESS\", \"customer_mobile\": \"" . $postdata->mobile . "\"}";
+            echo "{ \"result\": \"SUCCESS\", \"mobile\": \"" . $postdata->mobile . "\"}";
         } else
             echo "Unable to process request";
     }
@@ -142,7 +142,7 @@ class Customers extends RS_Controller
         }
         $this->customers_model->deductPoints($postdata->mobile, $postdata->points);
         if ($this->db->affected_rows () > 0) {
-            echo "{ \"result\": \"SUCCESS\", \"customer_mobile\": \"" . $postdata->mobile . "\"}";
+            echo "{ \"result\": \"SUCCESS\", \"mobile\": \"" . $postdata->mobile . "\"}";
         } else
             echo "Unable to process request";
     }
@@ -156,7 +156,7 @@ class Customers extends RS_Controller
         }
         $this->customers_model->addCashBack($postdata->mobile, $postdata->cashback);
         if ($this->db->affected_rows () > 0) {
-            echo "{ \"result\": \"SUCCESS\", \"customer_mobile\": \"" . $postdata->mobile . "\"}";
+            echo "{ \"result\": \"SUCCESS\", \"mobile\": \"" . $postdata->mobile . "\"}";
         } else
             echo "Unable to process request";
     }
@@ -170,7 +170,7 @@ class Customers extends RS_Controller
         }
         $this->customers_model->deductCashBack($postdata->mobile, $postdata->cashback);
         if ($this->db->affected_rows () > 0) {
-            echo "{ \"result\": \"SUCCESS\", \"customer_id\": \"" . $postdata->mobile . "\"}";
+            echo "{ \"result\": \"SUCCESS\", \"mobile\": \"" . $postdata->mobile . "\"}";
         } else
             echo "Unable to process request";
     }
