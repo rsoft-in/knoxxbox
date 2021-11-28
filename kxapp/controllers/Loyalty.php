@@ -56,6 +56,24 @@ class Loyalty extends RS_Controller
         }
     }
 
+    public function getDefault()
+    {
+        $res = $this->loyalty_model->getLoyaltyDefault();
+        if ($res->num_rows() == 1) {
+            $prow = $res->row();
+            $dataArray = array(
+                'loyalty_id' => $prow->loyalty_id,
+                'loyalty_name' => $prow->loyalty_name,
+                'loyalty_default' => $prow->loyalty_default,
+                'loyalty_params' => $prow->loyalty_params,
+                'loyalty_modified' => $prow->loyalty_modified
+            );
+            echo json_encode($dataArray);
+        } else {
+            echo 'NOT FOUND';
+        }
+    }
+
     public function update() {
 		$data = json_decode ( $this->input->post ( 'postdata' ) );
 		$guid = $this->utility->guid ();
