@@ -56,6 +56,46 @@ class Loyalty extends RS_Controller
         }
     }
 
+    public function update()
+    {
+        $data = json_decode($this->input->post('postdata'));
+        $guid = $this->utility->guid();
+        if ($data->mode === "add") {
+            $this->loyalty_model->insert($guid, $data->bid, $data->ln, $data->df, $data->param);
+            if ($this->db->affected_rows() > 0) {
+                echo "SUCCESS";
+            } else
+                echo "Unable to process request";
+        } else {
+            $this->loyalty_model->update($data->id, $data->ln, $data->param);
+            if ($this->db->affected_rows() > 0) {
+                echo "SUCCESS";
+            } else
+                echo "Unable to process request";
+        }
+    }
+
+    public function default()
+    {
+        $data = json_decode($this->input->post('postdata'));
+        $this->loyalty_model->setDefault($data->id);
+        if ($this->db->affected_rows() > 0) {
+            echo "SUCCESS";
+        } else
+            echo "Unable to process request";
+    }
+
+    public function delete()
+    {
+        $data = json_decode($this->input->post('postdata'));
+        $this->loyalty_model->delete($data->id);
+        if ($this->db->affected_rows() > 0) {
+            echo "SUCCESS";
+        } else
+            echo "Unable to process request";
+    }
+    
+    /** API Call Method */
     public function getDefault()
     {
         $res = $this->loyalty_model->getLoyaltyDefault();
@@ -73,40 +113,4 @@ class Loyalty extends RS_Controller
             echo 'NOT FOUND';
         }
     }
-
-    public function update() {
-		$data = json_decode ( $this->input->post ( 'postdata' ) );
-		$guid = $this->utility->guid ();
-		if ($data->mode === "add") {
-			$this->loyalty_model->insert ( $guid, $data->bid, $data->ln, $data->df, $data->param );
-			if ($this->db->affected_rows () > 0) {
-				echo "SUCCESS";
-			} else
-				echo "Unable to process request";
-		} else {
-			$this->loyalty_model->update ( $data->id, $data->ln, $data->param );
-			if ($this->db->affected_rows () > 0) {
-				echo "SUCCESS";
-			} else
-				echo "Unable to process request";
-		}
-	}
-
-    public function default() {
-		$data = json_decode ( $this->input->post ( 'postdata' ) );
-		$this->loyalty_model->setDefault ( $data->id );
-		if ($this->db->affected_rows () > 0) {
-			echo "SUCCESS";
-		} else
-			echo "Unable to process request";
-	}
-
-    public function delete() {
-		$data = json_decode ( $this->input->post ( 'postdata' ) );
-		$this->loyalty_model->delete ( $data->id );
-		if ($this->db->affected_rows () > 0) {
-			echo "SUCCESS";
-		} else
-			echo "Unable to process request";
-	}
 }
