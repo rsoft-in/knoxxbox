@@ -35,7 +35,7 @@ class Billing_model extends CI_Model
         return $query;
     }
 
-    public function insert($bill_id, $bill_nr, $bill_date, $bill_seller, $bill_customer_id, $bill_gross_amount, $bill_disc_param, $bill_disc_amount, $bill_grand_total, $bill_bid)
+    public function insert($bill_id, $bill_nr, $bill_date, $bill_seller, $bill_customer_id, $bill_gross_amount, $bill_disc_param, $bill_disc_amount, $bill_grand_total, $bill_bid, $bill_redeem_type, $bill_redeem_value, $bill_loyalty_type, $bill_loyalty_value)
     {
         $idata = array(
             'bill_id' => $bill_id,
@@ -47,12 +47,16 @@ class Billing_model extends CI_Model
             'bill_disc_param' => $bill_disc_param,
             'bill_disc_amount' => $bill_disc_amount,
             'bill_grand_total' => $bill_grand_total,
-            'bill_bid' => $bill_bid
+            'bill_bid' => $bill_bid,
+            'bill_redeem_type' => $bill_redeem_type,
+            'bill_redeem_value' => $bill_redeem_value,
+            'bill_loyalty_type' => $bill_loyalty_type,
+            'bill_loyalty_value' => $bill_loyalty_value
         );
         $this->db->insert('billing', $idata);
     }
 
-    public function update($bill_nr, $bill_date, $bill_seller, $bill_customer_id, $bill_gross_amount, $bill_disc_param, $bill_disc_amount, $bill_grand_total, $bill_bid)
+    public function update($bill_nr, $bill_date, $bill_seller, $bill_customer_id, $bill_gross_amount, $bill_disc_param, $bill_disc_amount, $bill_grand_total, $bill_bid, $bill_redeem_type, $bill_redeem_value, $bill_loyalty_type, $bill_loyalty_value)
     {
         $idata = array(
             'bill_date' => $bill_date,
@@ -62,7 +66,11 @@ class Billing_model extends CI_Model
             'bill_disc_param' => $bill_disc_param,
             'bill_disc_amount' => $bill_disc_amount,
             'bill_grand_total' => $bill_grand_total,
-            'bill_bid' => $bill_bid
+            'bill_bid' => $bill_bid,
+            'bill_redeem_type' => $bill_redeem_type,
+            'bill_redeem_value' => $bill_redeem_value,
+            'bill_loyalty_type' => $bill_loyalty_type,
+            'bill_loyalty_value' => $bill_loyalty_value
         );
         $this->db->where('bill_nr', $bill_nr);
         $this->db->update('billing', $idata);
@@ -77,8 +85,9 @@ class Billing_model extends CI_Model
         $this->db->update('billing', $idata);
     }
 
-    public function delete($bill_nr) {
-		$this->db->where ( 'bill_nr', $bill_nr );
-		$this->db->delete ( 'billing' );
-	}
+    public function delete($bill_nr)
+    {
+        $this->db->where('bill_nr', $bill_nr);
+        $this->db->delete('billing');
+    }
 }

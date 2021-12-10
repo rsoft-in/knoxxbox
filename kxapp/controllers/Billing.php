@@ -106,8 +106,7 @@ class Billing extends RS_Controller
         }
         $param = array(
             'type' => $postdata->type,
-            'deduct' => $postdata->redeem,
-            'add' => $add
+            'redeem' => $postdata->redeem
         );
         $this->billing_model->insert($guid, $postdata->bill_nr, $postdata->date, $postdata->seller,  $postdata->custid, $postdata->amount, $postdata->dparam, $postdata->damount, $postdata->gtotal, $postdata->bid);
         if ($this->db->affected_rows () > 0) {
