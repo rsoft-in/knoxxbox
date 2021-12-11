@@ -1,6 +1,6 @@
 <?php
 
-class Loyalty extends RS_Controller
+class Loyalty extends CI_Controller
 {
     public function __construct()
     {

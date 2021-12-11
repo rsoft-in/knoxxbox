@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Test extends RS_Controller
+class Test extends CI_Controller
 {
     public function index()
     {

@@ -35,10 +35,11 @@ class Loyalty_model extends CI_Model
         return $query;
     }
 
-    public function getLoyaltyDefault()
+    public function getLoyaltyDefault($loyalty_b_id)
     {
         $this->db->select('*');
         $this->db->from('loyalty');
+        $this->db->where('loyalty_b_id', $loyalty_b_id);
         $this->db->where('loyalty_default', 1);
         $query = $this->db->get();
         return $query;
