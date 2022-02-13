@@ -1,11 +1,12 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Users extends CI_Controller
+class Users extends RS_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->library('encryption');
 		$this->load->model('users_model');
 	}
 

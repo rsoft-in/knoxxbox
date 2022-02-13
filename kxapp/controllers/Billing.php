@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Billing extends CI_Controller
+class Billing extends RS_Controller
 {
     public function __construct()
     {
