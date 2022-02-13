@@ -8,14 +8,7 @@ class Customers_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
     }
-    /**
-     * Function to get Customers
-     * @param String $filter Compound string expression for where clause
-     * @param String $sort field name to sort eg. 'customer_name DESC'
-     * @param int $pn Page Number of recordset
-     * @param int $pn Page Size of recordset
-     * @return ResultSet Result
-     */
+
     public function getCustomers($filter, $sort, $pn, $ps)
     {
         $this->db->select('*');
@@ -53,11 +46,10 @@ class Customers_model extends CI_Model
         return $query;
     }
 
-    public function insert($customer_id, $customer_business_id, $customer_name, $customer_mobile,  $customer_email, $customer_address)
+    public function insert($customer_id, $customer_name, $customer_mobile,  $customer_email, $customer_address)
     {
         $idata = array(
             'customer_id' => $customer_id,
-            'customer_business_id' => $customer_business_id,
             'customer_name' => $customer_name,
             'customer_mobile' => $customer_mobile,
             'customer_email' => $customer_email,
