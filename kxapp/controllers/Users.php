@@ -122,7 +122,7 @@ class Users extends CI_Controller
 		$config['smtp_host'] = 'mail.knoxxbox.in';
 		$config['smtp_port'] = '587';
 		$config['smtp_user'] = 'sales@knoxxbox.in';
-		$config['smtp_pass'] = 'Godzilla0410';
+		$config['smtp_pass'] = 'xxxxxxxx';
 		$config['mailtype'] = 'html';
 		$config['charset'] = 'utf-8';
 		$config['wordwrap'] = TRUE;
