@@ -13,7 +13,7 @@
 
 <body>
     <div style="padding: 25px;">
-        <button onclick="addBill();">Test</button>
+        <button onclick="minusCashBack();">Test</button>
     </div>
 
     <script>
@@ -61,23 +61,16 @@
             });
         }
 
-        function addBill() {
-            // bill_nr,date,seller,custid,gross_amt,disc_amt,grand_total,bid,redeem_type,redeem_value
+        function addPoints() {
             var postdata = {
                 'bid': api_key,
-                'bill_nr': '11223344',
-                'date': '2021-12-11',
-                'seller': 'Demo Seller',
-                'custid': '50D1C665-A13B-113C-726B-8CCE43545066',
-                'gross_amt': '486',
-                'grand_total': '461',
-                'redeem_type': 'C',
-                'redeem_value': '25'
+                'mobile': '7032055707',
+                'points': 3
             };
             postdata = JSON.stringify(postdata);
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url() . index_page() ?>/billing/addBill",
+                url: "<?php echo base_url() ?>/customers/addPoints",
                 data: "postdata=" + postdata,
                 success: function(result) {
                     console.log(result);

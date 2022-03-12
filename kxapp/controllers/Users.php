@@ -1,12 +1,12 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Users extends RS_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('encryption');
 		$this->load->model('users_model');
 	}
 
@@ -119,21 +119,18 @@ class Users extends RS_Controller
 		$this->load->library('email');
 		$this->load->model('users_model');
 
-		$json = file_get_contents(base_url() . 'res/smtp.json');
-		$smtp = json_decode($json);
-
 		$config['protocol'] = 'smtp';
-		$config['smtp_host'] = $smtp->server;
-		$config['smtp_port'] = $smtp->port;
-		$config['smtp_user'] = $smtp->user;
-		$config['smtp_pass'] = $smtp->password;
+		$config['smtp_host'] = 'mail.knoxxbox.in';
+		$config['smtp_port'] = '587';
+		$config['smtp_user'] = 'sales@knoxxbox.in';
+		$config['smtp_pass'] = 'Godzilla0410';
 		$config['mailtype'] = 'html';
 		$config['charset'] = 'utf-8';
 		$config['wordwrap'] = TRUE;
 		$config['newline'] = "\r\n";
 
 		$this->email->initialize($config);
-		$this->email->from($smtp->email, $smtp->name);
+		$this->email->from('sales@knoxxbox.in', 'Knoxxbox CLP');
 		$this->email->to($email);
 		$this->email->subject("Welcome to Knoxxbox");
 		$this->email->message("<p>Dear " . $displayName . ",</p><p>Welcome to Knoxxbox. Your verification code is <b>" . $otp . "</b>.</p><p>Administrator<br>Knoxxbox</p>");

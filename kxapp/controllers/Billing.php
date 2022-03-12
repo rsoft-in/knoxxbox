@@ -8,8 +8,6 @@ class Billing extends RS_Controller
         parent::__construct();
         $this->load->model('billing_model');
         $this->load->model('customers_model');
-        $this->load->model('loyalty_model');
-        $this->load->model('business_model');
     }
 
     public function index()
@@ -94,43 +92,25 @@ class Billing extends RS_Controller
         }
     }
 
-    /**
-     * FUNCTION addBill()
-     * @package Billing
-     * @author  Rajesh Menon
-     * @version 1.0
-     * @param json $postdata bill_nr,date,seller,custid,gross_amt,disc_amt,grand_total,bid,redeem_type,redeem_value
-     * @return json result
-     */
-    public function addBill()
-    {
-        $post = json_decode($this->input->post('postdata'));
+    public function addBill() {
+        $postdata = json_decode($this->input->post('postdata'));
         // check api_key validity
-        if (!$this->authorizeAPI($post->bid)) {
+        if (!$this->authorizeAPI($postdata->bid)) {
             echo 'Unauthorized Access';
             return;
         }
-        $guid = $this->utility->guid();
-        $loyalty_value = 0;
-        $loyalty_type = 'POINTS';
-        $loyalties = $this->loyalty_model->getLoyaltyDefault($post->bid);
-        if ($loyalties->num_rows() == 1) {
-            $loyalty = $loyalties->row();
-            $loyalty_param = json_decode($loyalty->loyalty_params);
-            $loyalty_type = strtoupper($loyalty_param->type);
-            if ($loyalty_type == 'POINTS') {
-                $loyalty_type = 'P';
-                $loyalty_value = intval(floatval($post->grand_total) * floatval($loyalty_param->percentage_rate) / 100);
-                if ($loyalty_value > intval($loyalty_param->percentage_max_val))
-                    $loyalty_value = intval($loyalty_param->percentage_max_val);
-            } else {
-                $loyalty_type = 'C';
-                $loyalty_value = intval($loyalty_param->points_value) * intval(floatval($post->grand_total) / floatval($loyalty_param->points_amount));
-            }
+        $guid = $this->utility->guid ();
+        $add = 0;
+        if ($postdata->type == 'points') {
+            
         }
-
-        $this->billing_model->insert($guid, $post->bill_nr, $post->date, $post->seller,  $post->custid, $post->gross_amt, $post->grand_total, $post->bid, $post->redeem_type, $post->redeem_value, $loyalty_type == 'POINTS' ? 'P' : 'C', $loyalty_value);
-        if ($this->db->affected_rows() > 0) {
+        $param = array(
+            'type' => $postdata->type,
+            'deduct' => $postdata->redeem,
+            'add' => $add
+        );
+        $this->billing_model->insert($guid, $postdata->bill_nr, $postdata->date, $postdata->seller,  $postdata->custid, $postdata->amount, $postdata->dparam, $postdata->damount, $postdata->gtotal, $postdata->bid);
+        if ($this->db->affected_rows () > 0) {
             echo "{ \"result\": \"SUCCESS\", \"id\": \"" . $guid . "\"}";
         } else
             echo "Unable to process request";

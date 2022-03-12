@@ -8,7 +8,14 @@ class Customers_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
     }
-
+    /**
+     * Function to get Customers
+     * @param String $filter Compound string expression for where clause
+     * @param String $sort field name to sort eg. 'customer_name DESC'
+     * @param int $pn Page Number of recordset
+     * @param int $pn Page Size of recordset
+     * @return ResultSet Result
+     */
     public function getCustomers($filter, $sort, $pn, $ps)
     {
         $this->db->select('*');
@@ -30,7 +37,7 @@ class Customers_model extends CI_Model
 
     public function getCustomerById($customer_id)
     {
-    	$this->db->select('*');
+        $this->db->select('*');
         $this->db->from('customers');
         $this->db->where('customer_id', $customer_id);
         $query = $this->db->get();
@@ -39,7 +46,7 @@ class Customers_model extends CI_Model
 
     public function getCustomerByMobile($customer_mobile)
     {
-    	$this->db->select('*');
+        $this->db->select('*');
         $this->db->from('customers');
         $this->db->where('customer_mobile', $customer_mobile);
         $query = $this->db->get();
@@ -54,6 +61,8 @@ class Customers_model extends CI_Model
             'customer_mobile' => $customer_mobile,
             'customer_email' => $customer_email,
             'customer_address' => $customer_address,
+            'customer_points' => 0,
+            'customer_cashback' => 0,
             'customer_modified' => mdate("%Y-%m-%d %H:%i:%s", time())
         );
         $this->db->insert('customers', $idata);
@@ -72,10 +81,41 @@ class Customers_model extends CI_Model
         $this->db->update('customers', $idata);
     }
 
+    public function addPoints($customer_mobile, $customer_points)
+    {
+        $this->db->set('customer_points', 'customer_points+' . $customer_points, FALSE);
+        $this->db->set('customer_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->where('customer_mobile', $customer_mobile);
+        $this->db->update('customers');
+    }
+
+    public function deductPoints($customer_mobile, $customer_points)
+    {
+        $this->db->set('customer_points', 'customer_points-' . $customer_points, FALSE);
+        $this->db->set('customer_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->where('customer_mobile', $customer_mobile);
+        $this->db->update('customers');
+    }
+
+    public function addCashBack($customer_mobile, $customer_cashback)
+    {
+        $this->db->set('customer_cashback', 'customer_cashback+' . $customer_cashback, FALSE);
+        $this->db->set('customer_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->where('customer_mobile', $customer_mobile);
+        $this->db->update('customers');
+    }
+
+    public function deductCashBack($customer_mobile, $customer_cashback)
+    {
+        $this->db->set('customer_cashback', 'customer_cashback-' . $customer_cashback, FALSE);
+        $this->db->set('customer_modified', mdate("%Y-%m-%d %H:%i:%s", time()));
+        $this->db->where('customer_mobile', $customer_mobile);
+        $this->db->update('customers');
+    }
+
     public function delete($customer_id)
     {
         $this->db->where('customer_id', $customer_id);
         $this->db->delete('customers');
     }
-
 }
