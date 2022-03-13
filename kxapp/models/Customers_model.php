@@ -8,14 +8,7 @@ class Customers_model extends CI_Model
         // Call the Model constructor
         parent::__construct();
     }
-    /**
-     * Function to get Customers
-     * @param String $filter Compound string expression for where clause
-     * @param String $sort field name to sort eg. 'customer_name DESC'
-     * @param int $pn Page Number of recordset
-     * @param int $pn Page Size of recordset
-     * @return ResultSet Result
-     */
+
     public function getCustomers($filter, $sort, $pn, $ps)
     {
         $this->db->select('*');
