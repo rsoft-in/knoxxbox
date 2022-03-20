@@ -11,8 +11,10 @@ class Transactions_model extends CI_Model
 
     public function getTransactions($filter, $sort, $pn, $ps)
     {
-        $this->db->select('*');
+        $this->db->select('transactions.*, business.b_name, business.b_mobile, business.b_city, customer.customer_name, customer.customer_mobile');
         $this->db->from('transactions');
+        $this->db->join('business', 'business.b_id = transactions.tr_bid', 'inner');
+        $this->db->join('customer', 'customer.id = transactions.tr_customer_id', 'inner');
         $this->db->where("(1=1) " . $filter);
         $this->db->order_by($sort);
         $this->db->limit($ps, $pn);
