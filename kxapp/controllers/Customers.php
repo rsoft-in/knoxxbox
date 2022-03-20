@@ -46,7 +46,7 @@ class Customers extends RS_Controller
                 $_item = array(
                     'customer_id' => $row->customer_id,
                     'customer_name' => $row->customer_name,
-                    'cusomter_mobile' => $row->customer_mobile,
+                    'customer_mobile' => $row->customer_mobile,
                     'customer_email' => $row->customer_email,
                     'customer_address' => $row->customer_address,
                     'customer_points' => $row->customer_points,
@@ -90,22 +90,24 @@ class Customers extends RS_Controller
         }
     }
 
-    public function addCustomer() {
+    public function addCustomer()
+    {
         $postdata = json_decode($this->input->post('postdata'));
         // check api_key validity
         if (!$this->authorizeAPI($postdata->bid)) {
             echo 'Unauthorized Access';
             return;
         }
-        $guid = $this->utility->guid ();
+        $guid = $this->utility->guid();
         $this->customers_model->insert($guid, $postdata->bid, $postdata->name, $postdata->mobile,  $postdata->email, $postdata->address, 0, 0);
-        if ($this->db->affected_rows () > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo "{ \"result\": \"SUCCESS\", \"id\": \"" . $guid . "\"}";
         } else
             echo "Unable to process request";
     }
 
-    public function updateCustomer() {
+    public function updateCustomer()
+    {
         $postdata = json_decode($this->input->post('postdata'));
         // check api_key validity
         if (!$this->authorizeAPI($postdata->bid)) {
@@ -113,13 +115,14 @@ class Customers extends RS_Controller
             return;
         }
         $this->customers_model->update($postdata->id, $postdata->bid, $postdata->name, $postdata->mobile,  $postdata->email, $postdata->address);
-        if ($this->db->affected_rows () > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo "{ \"result\": \"SUCCESS\", \"id\": \"" . $postdata->id . "\"}";
         } else
             echo "Unable to process request";
     }
 
-    public function addPoints() {
+    public function addPoints()
+    {
         $postdata = json_decode($this->input->post('postdata'));
         // check api_key validity
         if (!$this->authorizeAPI($postdata->bid)) {
@@ -127,13 +130,14 @@ class Customers extends RS_Controller
             return;
         }
         $this->customers_model->addPoints($postdata->mobile, $postdata->points);
-        if ($this->db->affected_rows () > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo "{ \"result\": \"SUCCESS\", \"mobile\": \"" . $postdata->mobile . "\"}";
         } else
             echo "Unable to process request";
     }
 
-    public function deductPoints() {
+    public function deductPoints()
+    {
         $postdata = json_decode($this->input->post('postdata'));
         // check api_key validity
         if (!$this->authorizeAPI($postdata->bid)) {
@@ -141,13 +145,14 @@ class Customers extends RS_Controller
             return;
         }
         $this->customers_model->deductPoints($postdata->mobile, $postdata->points);
-        if ($this->db->affected_rows () > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo "{ \"result\": \"SUCCESS\", \"mobile\": \"" . $postdata->mobile . "\"}";
         } else
             echo "Unable to process request";
     }
 
-    public function addCashBack() {
+    public function addCashBack()
+    {
         $postdata = json_decode($this->input->post('postdata'));
         // check api_key validity
         if (!$this->authorizeAPI($postdata->bid)) {
@@ -155,13 +160,14 @@ class Customers extends RS_Controller
             return;
         }
         $this->customers_model->addCashBack($postdata->mobile, $postdata->cashback);
-        if ($this->db->affected_rows () > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo "{ \"result\": \"SUCCESS\", \"mobile\": \"" . $postdata->mobile . "\"}";
         } else
             echo "Unable to process request";
     }
 
-    public function deductCashBack() {
+    public function deductCashBack()
+    {
         $postdata = json_decode($this->input->post('postdata'));
         // check api_key validity
         if (!$this->authorizeAPI($postdata->bid)) {
@@ -169,10 +175,9 @@ class Customers extends RS_Controller
             return;
         }
         $this->customers_model->deductCashBack($postdata->mobile, $postdata->cashback);
-        if ($this->db->affected_rows () > 0) {
+        if ($this->db->affected_rows() > 0) {
             echo "{ \"result\": \"SUCCESS\", \"mobile\": \"" . $postdata->mobile . "\"}";
         } else
             echo "Unable to process request";
     }
-
 }
